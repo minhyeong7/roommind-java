@@ -1,23 +1,24 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/furniture_db?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/furniture_recommendation?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: root
-    password: 12345
+    password: 1234
 
-  # MyBatis 설정
-  mybatis:
-    mapper-locations: classpath:mappers/*.xml
-    type-aliases-package: com.roomgenius.furniture_recommendation.entity
-    configuration:
-      map-underscore-to-camel-case: true
+# MyBatis 설정 (spring 안에 있으면 안됨!)
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.roomgenius.furniture_recommendation.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
 
+# 로깅
+logging:
+  level:
+    com.roomgenius.furniture_recommendation.mapper: DEBUG
+    org.springframework.jdbc: DEBUG
+
+# 서버 포트
 server:
   port: 8080
-
-# CORS 설정 (React와 연동)
-cors:
-  allowed-origins: http://localhost:3000
-  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-  allowed-headers: "*"
-  allow-credentials: true
