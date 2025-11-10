@@ -1,15 +1,14 @@
 package com.roomgenius.furniture_recommendation.controller;
 
-import com.roomgenius.furniture_recommendation.dto.request.SignupRequest;
-import com.roomgenius.furniture_recommendation.dto.response.MemberResponse;
+import com.roomgenius.furniture_recommendation.entity.MemberDTO;
 import com.roomgenius.furniture_recommendation.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
-import jakarta.validation.Valid;  //
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,14 +16,16 @@ import java.util.Map;
 @RequestMapping("/api/members")
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class MemberController {
 
     private final MemberService memberService;
 
+    /** 회원가입 **/
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, Object>> signup(@Valid @RequestBody SignupRequest request) {
+    public ResponseEntity<Map<String, Object>> signup(@Valid @RequestBody MemberDTO dto) {
         try {
-            MemberResponse response = memberService.signup(request);
+            MemberDTO response = memberService.signup(dto);
 
             Map<String, Object> result = new HashMap<>();
             result.put("success", true);
@@ -41,6 +42,7 @@ public class MemberController {
         }
     }
 
+    /** 이메일 중복 체크 **/
     @GetMapping("/check-email")
     public ResponseEntity<Map<String, Object>> checkEmail(@RequestParam String email) {
         boolean isDuplicate = memberService.isEmailDuplicate(email);
@@ -53,10 +55,11 @@ public class MemberController {
         return ResponseEntity.ok(result);
     }
 
+    /** 회원 단건 조회 **/
     @GetMapping("/{userId}")
     public ResponseEntity<Map<String, Object>> getMember(@PathVariable Integer userId) {
         try {
-            MemberResponse response = memberService.getMemberById(userId);
+            MemberDTO response = memberService.getMemberById(userId);
 
             Map<String, Object> result = new HashMap<>();
             result.put("success", true);

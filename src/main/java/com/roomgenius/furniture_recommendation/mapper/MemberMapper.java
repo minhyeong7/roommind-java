@@ -1,6 +1,6 @@
 package com.roomgenius.furniture_recommendation.mapper;
 
-import com.roomgenius.furniture_recommendation.entity.Member;
+import com.roomgenius.furniture_recommendation.entity.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,14 +8,14 @@ import org.apache.ibatis.annotations.Param;
 public interface MemberMapper {
 
     // 회원가입
-    int insertMember(Member member);
+    int insertMember(MemberVO member);
 
     // 이메일 중복 체크
     int countByEmail(@Param("email") String email);
 
     // 이메일로 회원 조회
-    Member findByEmail(@Param("email") String email);
+    MemberVO findByEmail(@Param("email") String email);
 
     // ID로 회원 조회
-    Member findById(@Param("userId") Integer userId);
+    MemberVO findById(@Param("userId") Integer userId);
 }

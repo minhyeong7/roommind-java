@@ -1,8 +1,7 @@
 package com.roomgenius.furniture_recommendation.service;
 
-import com.roomgenius.furniture_recommendation.dto.request.SignupRequest;
-import com.roomgenius.furniture_recommendation.dto.response.MemberResponse;
-import com.roomgenius.furniture_recommendation.entity.Member;
+import com.roomgenius.furniture_recommendation.entity.MemberDTO;
+import com.roomgenius.furniture_recommendation.entity.MemberVO;
 import com.roomgenius.furniture_recommendation.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,21 +17,21 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberResponse signup(SignupRequest request) {
+    public MemberDTO signup(MemberDTO dto) {
         // 1. 이메일 중복 체크
-        if (memberMapper.countByEmail(request.getEmail()) > 0) {
+        if (memberMapper.countByEmail(dto.getEmail()) > 0) {
             throw new IllegalArgumentException("이미 사용 중인 이메일입니다");
         }
 
         // 2. 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
 
         // 3. Member 엔티티 생성
-        Member member = Member.builder()
-                .username(request.getUsername())
-                .phone(request.getPhone())
-                .address(request.getAddress())
-                .email(request.getEmail())
+        MemberVO member = MemberVO.builder()
+                .username(dto.getUsername())
+                .phone(dto.getPhone())
+                .address(dto.getAddress())
+                .email(dto.getEmail())
                 .password(encodedPassword)
                 .role("user")
                 .build();
@@ -40,8 +39,8 @@ public class MemberServiceImpl implements MemberService {
         // 4. DB 저장
         memberMapper.insertMember(member);
 
-        // 5. 응답 DTO 생성 (비밀번호 제외)
-        return MemberResponse.builder()
+        // 5. DTO로 변환 후 반환 (비밀번호 제외)
+        return MemberDTO.builder()
                 .userId(member.getUserId())
                 .username(member.getUsername())
                 .phone(member.getPhone())
@@ -58,13 +57,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponse getMemberById(Integer userId) {
-        Member member = memberMapper.findById(userId);
+    public MemberDTO getMemberById(Integer userId) {
+        MemberVO member = memberMapper.findById(userId);
         if (member == null) {
             throw new IllegalArgumentException("회원을 찾을 수 없습니다");
         }
 
-        return MemberResponse.builder()
+        return MemberDTO.builder()
                 .userId(member.getUserId())
                 .username(member.getUsername())
                 .phone(member.getPhone())

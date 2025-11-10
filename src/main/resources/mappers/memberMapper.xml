@@ -5,21 +5,21 @@
 <mapper namespace="com.roomgenius.furniture_recommendation.mapper.MemberMapper">
 
     <!-- Result Map -->
-    <resultMap id="MemberResultMap" type="com.roomgenius.furniture_recommendation.entity.Member">
-        <id property="userId" column="user_id"/>
+    <resultMap id="MemberResultMap" type="com.roomgenius.furniture_recommendation.entity.MemberVO">
+        <id property="userId" column="userId"/>
         <result property="username" column="username"/>
         <result property="phone" column="phone"/>
         <result property="address" column="address"/>
         <result property="email" column="email"/>
         <result property="password" column="password"/>
         <result property="role" column="role"/>
-        <result property="createdDate" column="created_date"/>
-        <result property="updatedDate" column="updated_date"/>
+        <result property="createdDate" column="createdDate"/>
+        <result property="updatedDate" column="updatedDate"/>
     </resultMap>
 
     <!-- 회원가입 -->
-    <insert id="insertMember" parameterType="com.roomgenius.furniture_recommendation.entity.Member" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO users (username, phone, address, email, password, role)
+    <insert id="insertMember" parameterType="com.roomgenius.furniture_recommendation.entity.MemberVO" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO Users (username, phone, address, email, password, role)
         VALUES (
         #{username},
         #{phone},
@@ -33,22 +33,22 @@
     <!-- 이메일 중복 체크 -->
     <select id="countByEmail" parameterType="string" resultType="int">
         SELECT COUNT(*)
-        FROM users
+        FROM Users
         WHERE email = #{email}
     </select>
 
     <!-- 이메일로 회원 조회 -->
     <select id="findByEmail" resultMap="MemberResultMap" parameterType="string">
-        SELECT user_id, username, phone, address, email, password, role, created_date, updated_date
-        FROM users
+        SELECT userId, username, phone, address, email, password, role, createdDate, updatedDate
+        FROM Users
         WHERE email = #{email}
     </select>
 
     <!-- ID로 회원 조회 -->
     <select id="findById" resultMap="MemberResultMap" parameterType="int">
-        SELECT user_id, username, phone, address, email, password, role, created_date, updated_date
-        FROM users
-        WHERE user_id = #{userId}
+        SELECT userId, username, phone, address, email, password, role, createdDate, updatedDate
+        FROM Users
+        WHERE userId = #{userId}
     </select>
 
 </mapper>

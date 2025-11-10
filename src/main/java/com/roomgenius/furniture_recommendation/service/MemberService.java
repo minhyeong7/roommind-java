@@ -1,16 +1,15 @@
 package com.roomgenius.furniture_recommendation.service;
 
-import com.roomgenius.furniture_recommendation.dto.request.SignupRequest;
-import com.roomgenius.furniture_recommendation.dto.response.MemberResponse;
+import com.roomgenius.furniture_recommendation.entity.MemberDTO;
 
 public interface MemberService {
 
     // 회원가입
-    MemberResponse signup(SignupRequest request);
+    MemberDTO signup(MemberDTO dto);
 
     // 이메일 중복 체크
     boolean isEmailDuplicate(String email);
 
     // 회원 조회
-    MemberResponse getMemberById(Integer userId);
+    MemberDTO getMemberById(Integer userId);
 }
