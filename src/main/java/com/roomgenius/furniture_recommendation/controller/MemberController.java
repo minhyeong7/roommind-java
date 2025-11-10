@@ -24,22 +24,14 @@ public class MemberController {
     /** 회원가입 **/
     @PostMapping("/signup")
     public ResponseEntity<Map<String, Object>> signup(@Valid @RequestBody MemberDTO dto) {
-        try {
-            MemberDTO response = memberService.signup(dto);
+        MemberDTO response = memberService.signup(dto);
 
-            Map<String, Object> result = new HashMap<>();
-            result.put("success", true);
-            result.put("message", "회원가입이 완료되었습니다");
-            result.put("data", response);
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "회원가입이 완료되었습니다");
+        result.put("data", response);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
-        } catch (IllegalArgumentException e) {
-            Map<String, Object> error = new HashMap<>();
-            error.put("success", false);
-            error.put("message", e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     /** 이메일 중복 체크 **/
@@ -58,20 +50,12 @@ public class MemberController {
     /** 회원 단건 조회 **/
     @GetMapping("/{userId}")
     public ResponseEntity<Map<String, Object>> getMember(@PathVariable Integer userId) {
-        try {
-            MemberDTO response = memberService.getMemberById(userId);
+        MemberDTO response = memberService.getMemberById(userId);
 
-            Map<String, Object> result = new HashMap<>();
-            result.put("success", true);
-            result.put("data", response);
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("data", response);
 
-            return ResponseEntity.ok(result);
-
-        } catch (IllegalArgumentException e) {
-            Map<String, Object> error = new HashMap<>();
-            error.put("success", false);
-            error.put("message", e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-        }
+        return ResponseEntity.ok(result);
     }
 }
