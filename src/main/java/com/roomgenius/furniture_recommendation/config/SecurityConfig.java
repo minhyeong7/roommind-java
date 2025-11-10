@@ -36,7 +36,7 @@ public class SecurityConfig {
                 // URL별 권한 설정
                 .authorizeHttpRequests(auth -> auth
                         // 인증 없이 접근 가능한 URL
-                        .requestMatchers("/api/members/register").permitAll()  // 회원가입
+                        .requestMatchers("/api/members/signup").permitAll()  // 회원가입
                         .requestMatchers("/api/members/login").permitAll()     // 로그인
                         .requestMatchers("/api/members/check-email").permitAll() // 이메일 중복 체크
 
