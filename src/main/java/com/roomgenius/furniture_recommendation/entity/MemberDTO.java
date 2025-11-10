@@ -39,4 +39,9 @@ public class MemberDTO {
 
     private String role; // user or admin
     private LocalDateTime createdDate;
+    private LocalDateTime updateDate;
+
+    // 로그인 응답용 필드 (JWT 토큰)
+    private String token;
+    private String message; // 응답 메시지
 }

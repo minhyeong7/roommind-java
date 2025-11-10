@@ -22,3 +22,8 @@ logging:
 # 서버 포트
 server:
   port: 8080
+
+# JWT 관련 환경 변수 (추가 ✅)
+jwt:
+  secret: mySuperSecretKeyForJwtTokenThatShouldBeVeryLong1234567890 #토큰 서명용 비밀키 (반드시 길게 설정해야 함)
+  expiration: 3600000 # 토큰 만료 시간 (1시간 예시)

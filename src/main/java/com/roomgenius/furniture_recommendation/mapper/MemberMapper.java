@@ -15,4 +15,7 @@ public interface MemberMapper {
 
     // ID로 회원 조회
     MemberVO findById(@Param("userId") Integer userId);
+
+    // 이메일로 회원 조회 (로그인용) ← 추가
+    MemberVO findByEmail(@Param("email") String email);
 }

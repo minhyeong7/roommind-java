@@ -9,4 +9,7 @@ public interface MemberService {
 
     // 회원 조회
     MemberDTO getMemberById(Integer userId);
+
+    // 로그인
+    MemberDTO login(MemberDTO dto);
 }

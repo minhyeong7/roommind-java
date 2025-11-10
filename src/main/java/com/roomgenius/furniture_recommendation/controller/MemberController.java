@@ -34,6 +34,19 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
+    /** 로그인 **/
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDTO dto) {
+        MemberDTO response = memberService.login(dto);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", response.getMessage());
+        result.put("data", response);
+
+        return ResponseEntity.ok(result);
+    }
+
     /** 회원 단건 조회 **/
     @GetMapping("/{userId}")
     public ResponseEntity<Map<String, Object>> getMember(@PathVariable Integer userId) {
