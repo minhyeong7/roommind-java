@@ -9,6 +9,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -22,10 +27,28 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // ✅ CORS 설정 추가
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // React 개발 서버 주소
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        config.setExposedHeaders(Arrays.asList("Authorization")); // JWT 응답 헤더 허용
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // CSRF 비활성화 (REST API는 CSRF 불필요)
+                // ✅ CORS 활성화
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
+                // CSRF 비활성화
                 .csrf(csrf -> csrf.disable())
 
                 // 세션 사용 안함 (JWT 사용)
@@ -35,19 +58,14 @@ public class SecurityConfig {
 
                 // URL별 권한 설정
                 .authorizeHttpRequests(auth -> auth
-                        // 인증 없이 접근 가능한 URL
-                        .requestMatchers("/api/members/signup").permitAll()  // 회원가입
-                        .requestMatchers("/api/members/login").permitAll()     // 로그인
-                        .requestMatchers("/api/members/check-email").permitAll() // 이메일 중복 체크
-
-                        // ADMIN만 접근 가능
+                        .requestMatchers("/api/members/signup").permitAll()
+                        .requestMatchers("/api/members/login").permitAll()
+                        .requestMatchers("/api/members/check-email").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-
-                        // 나머지는 인증 필요
                         .anyRequest().authenticated()
                 )
 
-                // JWT 필터 추가 (UsernamePasswordAuthenticationFilter 전에 실행)
+                // JWT 필터 추가
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
