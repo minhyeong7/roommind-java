@@ -51,10 +51,7 @@ public class MemberServiceImpl implements MemberService {
                 .build();
     }
 
-    @Override
-    public boolean isEmailDuplicate(String email) {
-        return memberMapper.countByEmail(email) > 0;
-    }
+
 
     @Override
     public MemberDTO getMemberById(Integer userId) {

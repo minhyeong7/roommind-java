@@ -37,13 +37,6 @@
         WHERE email = #{email}
     </select>
 
-    <!-- 이메일로 회원 조회 -->
-    <select id="findByEmail" resultMap="MemberResultMap" parameterType="string">
-        SELECT userId, username, phone, address, email, password, role, createdDate, updatedDate
-        FROM Users
-        WHERE email = #{email}
-    </select>
-
     <!-- ID로 회원 조회 -->
     <select id="findById" resultMap="MemberResultMap" parameterType="int">
         SELECT userId, username, phone, address, email, password, role, createdDate, updatedDate

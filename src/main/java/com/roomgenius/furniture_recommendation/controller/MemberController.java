@@ -34,19 +34,6 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    /** 이메일 중복 체크 **/
-    @GetMapping("/check-email")
-    public ResponseEntity<Map<String, Object>> checkEmail(@RequestParam String email) {
-        boolean isDuplicate = memberService.isEmailDuplicate(email);
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("isDuplicate", isDuplicate);
-        result.put("message", isDuplicate ? "이미 사용 중인 이메일입니다" : "사용 가능한 이메일입니다");
-
-        return ResponseEntity.ok(result);
-    }
-
     /** 회원 단건 조회 **/
     @GetMapping("/{userId}")
     public ResponseEntity<Map<String, Object>> getMember(@PathVariable Integer userId) {
