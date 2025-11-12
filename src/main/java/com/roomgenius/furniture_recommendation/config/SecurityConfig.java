@@ -3,6 +3,7 @@ package com.roomgenius.furniture_recommendation.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,7 +28,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ CORS 설정 추가
+    // ✅ CORS 설정
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -35,7 +36,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // React 개발 서버 주소
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        config.setExposedHeaders(Arrays.asList("Authorization")); // JWT 응답 헤더 허용
+        config.setExposedHeaders(Arrays.asList("Authorization")); // JWT 헤더 클라이언트 노출
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
@@ -45,27 +46,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // ✅ CORS 활성화
+                // ✅ CORS 적용
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // CSRF 비활성화
+                // ✅ CSRF 비활성화 (REST API용)
                 .csrf(csrf -> csrf.disable())
 
-                // 세션 사용 안함 (JWT 사용)
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                // ✅ 세션 비활성화 (JWT 방식)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // URL별 권한 설정
+                // ✅ URL별 권한 설정
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/members/signup").permitAll()
-                        .requestMatchers("/api/members/login").permitAll()
-                        .requestMatchers("/api/boards/**").permitAll()
+                        // 회원가입, 로그인은 누구나 접근 가능
+                        .requestMatchers("/api/members/signup", "/api/members/login").permitAll()
+
+                        // 게시판: 조회(GET)은 공개, 등록/수정/삭제는 인증 필요
+                        .requestMatchers(HttpMethod.GET, "/api/boards/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/boards/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/boards/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/boards/**").authenticated()
+
+                        // 관리자 전용
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+                        // 그 외 요청은 인증 필요
                         .anyRequest().authenticated()
                 )
 
-                // JWT 필터 추가
+                // ✅ JWT 필터 등록 (UsernamePasswordAuthenticationFilter 앞에 추가)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
