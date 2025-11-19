@@ -1,9 +1,9 @@
 package com.roomgenius.furniture_recommendation.controller;
 
 import com.roomgenius.furniture_recommendation.config.JwtTokenProvider;
-import com.roomgenius.furniture_recommendation.entity.BoardDTO;
-import com.roomgenius.furniture_recommendation.entity.BoardVO;
-import com.roomgenius.furniture_recommendation.service.BoardService;
+import com.roomgenius.furniture_recommendation.entity.QnABoardDTO;
+import com.roomgenius.furniture_recommendation.entity.QnABoardVO;
+import com.roomgenius.furniture_recommendation.service.QnABoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/boards")
-public class BoardController {
+public class QnABoardController {
 
-    private final BoardService boardService;
+    private final QnABoardService qnABoardService;
     private final JwtTokenProvider jwtTokenProvider;
 
     // ✅ 게시글 등록 (이미지 포함)
     @PostMapping
     public ResponseEntity<Map<String, Object>> insertBoard(
-            @Valid @RequestPart("board") BoardDTO dto,
+            @Valid @RequestPart("board") QnABoardDTO dto,
             @RequestPart(value = "images", required = false) List<MultipartFile> images,
             @RequestHeader(value = "Authorization") String token) {
 
@@ -41,7 +41,7 @@ public class BoardController {
         dto.setEmail(emailFromToken);
 
         // 🔹 2. 게시글 등록
-        int result = boardService.insert(dto, images);
+        int result = qnABoardService.insert(dto, images);
 
         if (result > 0) {
             response.put("success", true);
@@ -58,7 +58,7 @@ public class BoardController {
     // ✅ 게시글 전체 조회
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllBoards() {
-        List<BoardVO> boards = boardService.selectAll();
+        List<QnABoardVO> boards = qnABoardService.selectAll();
         Map<String, Object> response = new HashMap<>();
 
         response.put("success", true);
@@ -71,7 +71,7 @@ public class BoardController {
     // ✅ 게시글 상세 조회
     @GetMapping("/{boardId}")
     public ResponseEntity<Map<String, Object>> getBoardById(@PathVariable int boardId) {
-        BoardVO board = boardService.selectById(boardId);
+        QnABoardVO board = qnABoardService.selectById(boardId);
         Map<String, Object> response = new HashMap<>();
 
         if (board == null) {
@@ -90,7 +90,7 @@ public class BoardController {
     @PutMapping("/{boardId}")
     public ResponseEntity<Map<String, Object>> updateBoard(
             @PathVariable int boardId,
-            @Valid @RequestPart("board") BoardDTO dto,
+            @Valid @RequestPart("board") QnABoardDTO dto,
             @RequestPart(value = "images", required = false) List<MultipartFile> images,
             @RequestHeader(value = "Authorization") String token) {
 
@@ -101,7 +101,7 @@ public class BoardController {
         String emailFromToken = jwtTokenProvider.getEmailFromToken(tokenValue);
 
         // 🔹 2. 기존 게시글 조회
-        BoardVO existing = boardService.selectById(boardId);
+        QnABoardVO existing = qnABoardService.selectById(boardId);
         if (existing == null) {
             response.put("success", false);
             response.put("message", "존재하지 않는 게시글입니다.");
@@ -117,7 +117,7 @@ public class BoardController {
 
         // 🔹 4. 수정 처리
         dto.setBoardId(boardId);
-        int result = boardService.update(dto, images);
+        int result = qnABoardService.update(dto, images);
 
         response.put("success", result > 0);
         response.put("message", result > 0 ? "게시글 수정 성공" : "게시글 수정 실패");
@@ -137,7 +137,7 @@ public class BoardController {
         String emailFromToken = jwtTokenProvider.getEmailFromToken(tokenValue);
 
         // 🔹 2. 기존 게시글 조회
-        BoardVO existing = boardService.selectById(boardId);
+        QnABoardVO existing = qnABoardService.selectById(boardId);
         if (existing == null) {
             response.put("success", false);
             response.put("message", "존재하지 않는 게시글입니다.");
@@ -152,7 +152,7 @@ public class BoardController {
         }
 
         // 🔹 4. 삭제 처리
-        int result = boardService.delete(boardId);
+        int result = qnABoardService.delete(boardId);
 
         response.put("success", result > 0);
         response.put("message", result > 0 ? "게시글 삭제 성공" : "게시글 삭제 실패");

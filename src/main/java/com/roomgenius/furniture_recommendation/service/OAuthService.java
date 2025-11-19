@@ -3,8 +3,8 @@ package com.roomgenius.furniture_recommendation.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roomgenius.furniture_recommendation.config.JwtTokenProvider;
-import com.roomgenius.furniture_recommendation.entity.MemberVO;
-import com.roomgenius.furniture_recommendation.mapper.MemberMapper;
+import com.roomgenius.furniture_recommendation.entity.UserVO;
+import com.roomgenius.furniture_recommendation.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class OAuthService {
 
     // ⭐ DB 조회/저장하는 MyBatis Mapper
-    private final MemberMapper memberMapper;
+    private final UserMapper userMapper;
 
     // ⭐ JWT 토큰을 생성하는 컴포넌트
     private final JwtTokenProvider jwtTokenProvider;
@@ -35,16 +35,16 @@ public class OAuthService {
     // ================================
     //  application.yml에서 가져오는 설정 값
     // ================================
-    @Value("${kakao.clientId}")      // ✅ 카멜 케이스
+    @Value("${kakao.clientId}")
     private String kakaoClientId;
 
-    @Value("${kakao.redirectUri}")   // ✅ 카멜 케이스
+    @Value("${kakao.redirectUri}")
     private String kakaoRedirectUri;
 
-    @Value("${kakao.tokenUri}")      // ✅ 카멜 케이스
+    @Value("${kakao.tokenUri}")
     private String kakaoTokenUri;
 
-    @Value("${kakao.userInfoUri}")   // ✅ 카멜 케이스
+    @Value("${kakao.userInfoUri}")
     private String kakaoUserInfoUri;
 
     // ================================
@@ -77,14 +77,14 @@ public class OAuthService {
                     socialId, email, nickname);
 
             // 4️⃣ DB에 소셜 ID로 사용자 조회
-            MemberVO member = memberMapper.findBySocial(socialId, SOCIAL_TYPE_KAKAO);
+            UserVO user = userMapper.findBySocial(socialId, SOCIAL_TYPE_KAKAO);
 
             // 5️⃣ 없으면 회원가입
-            if (member == null) {
+            if (user == null) {
                 log.info("신규 카카오 유저 - 회원가입 진행");
 
-                member = MemberVO.builder()
-                        .username(nickname != null ? nickname : DEFAULT_USERNAME) // 닉네임 없으면 기본값
+                user = UserVO.builder()
+                        .userName(nickname != null ? nickname : DEFAULT_USERNAME) // 닉네임 없으면 기본값
                         .email(email)
                         .socialType(SOCIAL_TYPE_KAKAO)
                         .socialId(socialId)
@@ -92,31 +92,31 @@ public class OAuthService {
                         .build();
 
                 // DB 저장
-                memberMapper.insertMember(member);
-                log.info("신규 회원 등록 완료 - userId: {}", member.getUserId());
+                userMapper.insertUser(user);
+                log.info("신규 회원 등록 완료 - userId: {}", user.getUserId());
             } else {
-                log.info("기존 카카오 유저 로그인 - userId: {}", member.getUserId());
+                log.info("기존 카카오 유저 로그인 - userId: {}", user.getUserId());
             }
 
             // 6️⃣ JWT 토큰을 만들 때 식별자로 사용할 값 선택
             //    - 이메일이 없으면 socialId 사용
-            String identifier = member.getEmail() != null
-                    ? member.getEmail()
-                    : member.getSocialId();
+            String identifier = user.getEmail() != null
+                    ? user.getEmail()
+                    : user.getSocialId();
 
             // 7️⃣ JWT 토큰 생성
-            String token = jwtTokenProvider.generateToken(identifier, member.getRole());
+            String token = jwtTokenProvider.generateToken(identifier, user.getRole());
             log.info("JWT 토큰 발급 완료");
 
             // 8️⃣ React로 전달할 로그인 정보 구성
             Map<String, Object> result = new HashMap<>();
             result.put("token", token);
-            result.put("username", member.getUsername());
-            result.put("socialType", member.getSocialType());
-            result.put("role", member.getRole());
-            result.put("userId", member.getUserId());
+            result.put("username", user.getUserName());
+            result.put("socialType", user.getSocialType());
+            result.put("role", user.getRole());
+            result.put("userId", user.getUserId());
 
-            log.info("로그인 결과 반환 - username: {}, role: {}", member.getUsername(), member.getRole());
+            log.info("로그인 결과 반환 - username: {}, role: {}", user.getUserName(), user.getRole());
 
             return result;
 

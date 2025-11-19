@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.roomgenius.furniture_recommendation.mapper.MemberMapper">
+<mapper namespace="com.roomgenius.furniture_recommendation.mapper.UserMapper">
 
     <!-- Result Map: DB 컬럼명(camelCase)과 정확히 일치 -->
-    <resultMap id="MemberResultMap" type="com.roomgenius.furniture_recommendation.entity.MemberVO">
+    <resultMap id="UserResultMap" type="com.roomgenius.furniture_recommendation.entity.UserVO">
         <id property="userId" column="userId"/>
-        <result property="username" column="username"/>
+        <result property="userName" column="userName"/>
         <result property="phone" column="phone"/>
         <result property="address" column="address"/>
         <result property="email" column="email"/>
@@ -20,14 +20,14 @@
     </resultMap>
 
     <!-- 회원가입 (일반 + 소셜 공용) -->
-    <insert id="insertMember"
-            parameterType="com.roomgenius.furniture_recommendation.entity.MemberVO"
+    <insert id="insertUser"
+            parameterType="com.roomgenius.furniture_recommendation.entity.UserVO"
             useGeneratedKeys="true"
             keyProperty="userId">
         INSERT INTO Users
-        (username, phone, address, email, password, socialType, socialId, role)
+        (userName, phone, address, email, password, socialType, socialId, role)
         VALUES
-        (#{username}, #{phone}, #{address}, #{email}, #{password},
+        (#{userName}, #{phone}, #{address}, #{email}, #{password},
         #{socialType}, #{socialId}, COALESCE(#{role}, 'user'))
     </insert>
 
@@ -39,24 +39,24 @@
     </select>
 
     <!-- ID로 회원 조회 -->
-    <select id="findById" resultMap="MemberResultMap" parameterType="int">
-        SELECT userId, username, phone, address, email, password,
+    <select id="findById" resultMap="UserResultMap" parameterType="int">
+        SELECT userId, userName, phone, address, email, password,
         socialType, socialId, role, createdDate, updatedDate
         FROM Users
         WHERE userId = #{userId}
     </select>
 
     <!-- 이메일로 회원 조회 (일반 로그인용) -->
-    <select id="findByEmail" resultMap="MemberResultMap" parameterType="string">
-        SELECT userId, username, phone, address, email, password,
+    <select id="findByEmail" resultMap="UserResultMap" parameterType="string">
+        SELECT userId, userName, phone, address, email, password,
         socialType, socialId, role, createdDate, updatedDate
         FROM Users
         WHERE email = #{email}
     </select>
 
     <!-- 소셜 로그인용 조회 (socialId + socialType) -->
-    <select id="findBySocial" resultMap="MemberResultMap" parameterType="map">
-        SELECT userId, username, phone, address, email, password,
+    <select id="findBySocial" resultMap="UserResultMap" parameterType="map">
+        SELECT userId, userName, phone, address, email, password,
         socialType, socialId, role, createdDate, updatedDate
         FROM Users
         WHERE socialId = #{socialId}

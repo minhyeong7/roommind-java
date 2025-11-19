@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberDTO {
+public class UserDTO {
 
     private Integer userId; // 회원 고유 ID (조회 시 사용)
 
     @NotBlank(message = "이름은 필수입니다")
-    private String username;
+    private String userName;
 
     @Pattern(regexp = "^010-\\d{4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다")
     private String phone;

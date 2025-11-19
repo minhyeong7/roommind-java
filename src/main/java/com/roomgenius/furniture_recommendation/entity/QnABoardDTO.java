@@ -17,14 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BoardDTO {
+public class QnABoardDTO {
     // ===== 응답 시에만 포함되는 필드 =====
     private Integer boardId;
     private Integer userId;
     private String username;
     private String email;
-    private Integer commentCount;
-    private Integer likeCount;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 

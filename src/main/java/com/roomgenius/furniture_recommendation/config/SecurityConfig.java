@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .requestMatchers("/oauth/kakao").permitAll()
                         .requestMatchers("/api/naver/**").permitAll()
                         // 회원가입, 로그인은 누구나 접근 가능
-                        .requestMatchers("/api/members/signup", "/api/members/login").permitAll()
+                        .requestMatchers("/api/users/signup", "/api/users/login").permitAll()
 
                         // 게시판: 조회(GET)은 공개, 등록/수정/삭제는 인증 필요
                         .requestMatchers(HttpMethod.GET, "/api/boards/**").permitAll()

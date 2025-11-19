@@ -1,10 +1,10 @@
 package com.roomgenius.furniture_recommendation.service;
 
-import com.roomgenius.furniture_recommendation.entity.BoardDTO;
-import com.roomgenius.furniture_recommendation.entity.BoardVO;
-import com.roomgenius.furniture_recommendation.entity.MemberVO;
-import com.roomgenius.furniture_recommendation.mapper.BoardMapper;
-import com.roomgenius.furniture_recommendation.mapper.MemberMapper;
+import com.roomgenius.furniture_recommendation.entity.QnABoardDTO;
+import com.roomgenius.furniture_recommendation.entity.QnABoardVO;
+import com.roomgenius.furniture_recommendation.entity.UserVO;
+import com.roomgenius.furniture_recommendation.mapper.QnABoardMapper;
+import com.roomgenius.furniture_recommendation.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,24 +20,24 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class BoardServiceImpl implements BoardService {
+public class QnABoardServiceImpl implements QnABoardService {
 
-    private final BoardMapper boardMapper;
-    private final MemberMapper memberMapper;
+    private final QnABoardMapper qnABoardMapper;
+    private final UserMapper userMapper;
 
     /**
      * ✅ 게시글 등록 (이미지 업로드 포함)
      */
     @Override
     @Transactional
-    public int insert(BoardDTO dto, List<MultipartFile> images) {
+    public int insert(QnABoardDTO dto, List<MultipartFile> images) {
         try {
             log.info("📌 게시글 등록 요청: {}", dto);
             validateBoardDTO(dto);
 
             // 이메일 → 회원 조회
-            MemberVO member = memberMapper.findByEmail(dto.getEmail());
-            if (member == null) {
+            UserVO user = userMapper.findByEmail(dto.getEmail());
+            if (user == null) {
                 throw new IllegalArgumentException("유효하지 않은 사용자입니다.");
             }
 
@@ -45,8 +45,8 @@ public class BoardServiceImpl implements BoardService {
             String imageUrl = uploadImage(images); // ❗ 형식/확장자 오류 시 IllegalArgumentException 발생
 
             // DB 저장
-            BoardVO vo = BoardVO.builder()
-                    .userId(member.getUserId())
+            QnABoardVO vo = QnABoardVO.builder()
+                    .userId(user.getUserId())
                     .title(dto.getTitle())
                     .content(dto.getContent())
                     .imageUrls(imageUrl)
@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService {
                     .updatedDate(LocalDateTime.now())
                     .build();
 
-            int result = boardMapper.insert(vo);
+            int result = qnABoardMapper.insert(vo);
             if (result == 0) throw new RuntimeException("게시글 등록 실패");
             log.info("✅ 게시글 등록 완료: {}", vo);
             return result;
@@ -73,18 +73,18 @@ public class BoardServiceImpl implements BoardService {
      * ✅ 게시글 전체 조회
      */
     @Override
-    public List<BoardVO> selectAll() {
+    public List<QnABoardVO> selectAll() {
         log.info("📌 게시글 전체 조회");
-        return boardMapper.selectAll();
+        return qnABoardMapper.selectAll();
     }
 
     /**
      * ✅ 게시글 상세 조회
      */
     @Override
-    public BoardVO selectById(int boardId) {
+    public QnABoardVO selectById(int boardId) {
         log.info("📌 게시글 상세 조회 요청: {}", boardId);
-        return boardMapper.selectById(boardId);
+        return qnABoardMapper.selectById(boardId);
     }
 
     /**
@@ -92,12 +92,12 @@ public class BoardServiceImpl implements BoardService {
      */
     @Override
     @Transactional
-    public int update(BoardDTO dto, List<MultipartFile> images) {
+    public int update(QnABoardDTO dto, List<MultipartFile> images) {
         try {
             log.info("📌 게시글 수정 요청: {}", dto);
             validateBoardDTO(dto);
 
-            BoardVO existing = boardMapper.selectById(dto.getBoardId());
+            QnABoardVO existing = qnABoardMapper.selectById(dto.getBoardId());
             if (existing == null) throw new IllegalArgumentException("존재하지 않는 게시글입니다.");
 
             // 새 이미지가 올라왔을 때만 교체 (없으면 기존 유지)
@@ -106,7 +106,7 @@ public class BoardServiceImpl implements BoardService {
                 newImageUrl = uploadImage(images); // ❗ 형식/확장자 오류 시 IllegalArgumentException 발생
             }
 
-            BoardVO vo = BoardVO.builder()
+            QnABoardVO vo = QnABoardVO.builder()
                     .boardId(dto.getBoardId())
                     .title(dto.getTitle())
                     .content(dto.getContent())
@@ -114,7 +114,7 @@ public class BoardServiceImpl implements BoardService {
                     .updatedDate(LocalDateTime.now())
                     .build();
 
-            int result = boardMapper.update(vo);
+            int result = qnABoardMapper.update(vo);
             if (result == 0) throw new RuntimeException("게시글 수정 실패");
             log.info("✅ 게시글 수정 성공: {}", vo);
             return result;
@@ -135,7 +135,7 @@ public class BoardServiceImpl implements BoardService {
     @Transactional
     public int delete(int boardId) {
         log.info("📌 게시글 삭제 요청: {}", boardId);
-        return boardMapper.delete(boardId);
+        return qnABoardMapper.delete(boardId);
     }
 
     /**
@@ -190,7 +190,7 @@ public class BoardServiceImpl implements BoardService {
     /**
      * ✅ 입력값 검증
      */
-    private void validateBoardDTO(BoardDTO dto) {
+    private void validateBoardDTO(QnABoardDTO dto) {
         if (dto == null) throw new IllegalArgumentException("게시글 데이터가 없습니다.");
         if (dto.getTitle() == null || dto.getTitle().trim().isEmpty())
             throw new IllegalArgumentException("제목은 필수입니다.");

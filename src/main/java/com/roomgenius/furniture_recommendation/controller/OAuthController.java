@@ -71,7 +71,7 @@ public class OAuthController {
 
             // ⭐ OAuthService에서 만들어준 데이터 꺼내기
             String jwtToken = (String) loginResult.get("token");
-            String username = (String) loginResult.get("username");
+            String userName = (String) loginResult.get("userName");
             String socialType = (String) loginResult.get("socialType");
             String role = (String) loginResult.get("role");
 
@@ -80,7 +80,7 @@ public class OAuthController {
             // ⭐ React로 넘겨줄 주소 구성 (URL 인코딩 필수!)
             String redirectUrl = frontendUrl + "/login-success"
                     + "?token=" + URLEncoder.encode(jwtToken, StandardCharsets.UTF_8)
-                    + "&username=" + URLEncoder.encode(username, StandardCharsets.UTF_8)
+                    + "&userName=" + URLEncoder.encode(userName, StandardCharsets.UTF_8)
                     + "&socialType=" + socialType
                     + "&role=" + role;
 

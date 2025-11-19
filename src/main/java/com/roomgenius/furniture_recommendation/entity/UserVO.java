@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberVO {
+public class UserVO {
     private int userId;                // PK
-    private String username;           // 이름
+    private String userName;           // 이름
     private String phone;              // 전화번호
     private String address;            // 주소
 

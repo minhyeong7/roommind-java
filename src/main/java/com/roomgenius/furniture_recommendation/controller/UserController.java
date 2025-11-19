@@ -1,7 +1,7 @@
 package com.roomgenius.furniture_recommendation.controller;
 
-import com.roomgenius.furniture_recommendation.entity.MemberDTO;
-import com.roomgenius.furniture_recommendation.service.MemberService;
+import com.roomgenius.furniture_recommendation.entity.UserDTO;
+import com.roomgenius.furniture_recommendation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,18 +13,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/members")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Validated
 @CrossOrigin(origins = "http://localhost:3000")
-public class MemberController {
+public class UserController {
 
-    private final MemberService memberService;
+    private final UserService userService;
 
     /** 회원가입 **/
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, Object>> signup(@Valid @RequestBody MemberDTO dto) {
-        MemberDTO response = memberService.signup(dto);
+    public ResponseEntity<Map<String, Object>> signup(@Valid @RequestBody UserDTO dto) {
+        UserDTO response = userService.signup(dto);
 
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
@@ -36,8 +36,8 @@ public class MemberController {
 
     /** 로그인 **/
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDTO dto) {
-        MemberDTO response = memberService.login(dto);
+    public ResponseEntity<Map<String, Object>> login(@RequestBody UserDTO dto) {
+        UserDTO response = userService.login(dto);
 
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
@@ -49,8 +49,8 @@ public class MemberController {
 
     /** 회원 단건 조회 **/
     @GetMapping("/{userId}")
-    public ResponseEntity<Map<String, Object>> getMember(@PathVariable Integer userId) {
-        MemberDTO response = memberService.getMemberById(userId);
+    public ResponseEntity<Map<String, Object>> getUser(@PathVariable Integer userId) {
+        UserDTO response = userService.getUserById(userId);
 
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
