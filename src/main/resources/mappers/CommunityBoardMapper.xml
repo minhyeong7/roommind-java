@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.roomgenius.furniture_recommendation.mapper.CommunityBoardMapper">
+
+    <!-- 게시글 등록 -->
+    <insert id="insert"
+            parameterType="com.roomgenius.furniture_recommendation.entity.CommunityBoardVO"
+            useGeneratedKeys="true"
+            keyProperty="communityBoardId">
+
+        INSERT INTO CommunityBoard (
+        user_id,
+        title,
+        content,
+        created_date,
+        updated_date
+        )
+        VALUES (
+        #{userId},
+        #{title},
+        #{content},
+        NOW(),
+        NOW()
+        );
+    </insert>
+
+
+    <!-- 게시글 전체 조회 (작성자 정보 JOIN) -->
+    <select id="selectAll"
+            resultType="com.roomgenius.furniture_recommendation.entity.CommunityBoardVO">
+        SELECT
+        c.community_board_id AS communityBoardId,
+        c.user_id            AS userId,
+        c.title              AS title,
+        c.content            AS content,
+        c.created_date       AS createdDate,
+        c.updated_date       AS updatedDate,
+        u.user_name          AS userName,
+        u.email              AS email
+        FROM CommunityBoard c
+        JOIN User u ON c.user_id = u.user_id
+        ORDER BY c.community_board_id DESC
+    </select>
+
+    <!-- 게시글 상세 조회 -->
+    <select id="selectById"
+            parameterType="Integer"
+            resultType="com.roomgenius.furniture_recommendation.entity.CommunityBoardVO">
+        SELECT
+        c.community_board_id AS communityBoardId,
+        c.user_id            AS userId,
+        c.title              AS title,
+        c.content            AS content,
+        c.created_date       AS createdDate,
+        c.updated_date       AS updatedDate,
+        u.user_name          AS userName,
+        u.email              AS email
+        FROM CommunityBoard c
+        JOIN User u ON c.user_id = u.user_id
+        WHERE c.community_board_id = #{communityBoardId}
+    </select>
+
+    <!-- 게시글 수정 -->
+    <update id="update"
+            parameterType="com.roomgenius.furniture_recommendation.entity.CommunityBoardVO">
+        UPDATE CommunityBoard
+        SET
+        title        = #{title},
+        content      = #{content},
+        updated_date = NOW()
+        WHERE community_board_id = #{communityBoardId}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM CommunityBoard
+        WHERE community_board_id = #{communityBoardId}
+    </delete>
+
+</mapper>
