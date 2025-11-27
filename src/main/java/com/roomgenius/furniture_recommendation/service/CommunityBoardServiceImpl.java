@@ -2,14 +2,17 @@ package com.roomgenius.furniture_recommendation.service;
 
 import com.roomgenius.furniture_recommendation.entity.CommunityBoardDTO;
 import com.roomgenius.furniture_recommendation.entity.CommunityBoardVO;
+import com.roomgenius.furniture_recommendation.entity.FileVO;
 import com.roomgenius.furniture_recommendation.entity.UserVO;
 import com.roomgenius.furniture_recommendation.mapper.CommunityBoardMapper;
 import com.roomgenius.furniture_recommendation.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -18,6 +21,7 @@ import java.util.NoSuchElementException;
 @Service
 public class CommunityBoardServiceImpl implements CommunityBoardService {
 
+    private final FileService fileService;
     private final CommunityBoardMapper communityBoardMapper;
     private final UserMapper userMapper;
 
@@ -61,8 +65,19 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     /** ==================== 전체 조회 ==================== */
     @Override
     public List<CommunityBoardVO> selectAll() {
-        return communityBoardMapper.selectAll();
+
+        // 1) 전체 게시글 가져오기
+        List<CommunityBoardVO> list = communityBoardMapper.selectAll();
+
+        // 2) 이미지 붙이기
+        for (CommunityBoardVO board : list) {
+            List<FileVO> images = fileService.getCommunityFiles(board.getCommunityBoardId());
+            board.setImages(images);
+        }
+
+        return list;
     }
+
 
     /** ==================== 상세 조회 ==================== */
     @Override
