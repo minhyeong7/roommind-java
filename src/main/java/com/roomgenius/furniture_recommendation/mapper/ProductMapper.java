@@ -24,6 +24,8 @@ public interface ProductMapper {
 
     // ⭐ 수정 추가
     int updateProduct(ProductDTO dto);
+
+    List<ProductDTO> getFilteredProducts(String category, String keyword, String sort);
 }
 
 

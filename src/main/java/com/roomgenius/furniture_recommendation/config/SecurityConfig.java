@@ -74,10 +74,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/qnaboards/**").authenticated()
 
                         // 관리자 전용
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
+                        .requestMatchers("/api/admin/**").permitAll()
                         // ⭐ 정적 이미지 허용 (이미지 접근 허용)
                         .requestMatchers("/uploads/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/admin/products/**").permitAll()
 
                         // 그 외는 인증 필요
                         .anyRequest().authenticated()

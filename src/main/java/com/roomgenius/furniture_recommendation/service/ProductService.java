@@ -20,4 +20,5 @@ public interface ProductService {
 
     // ⭐ 상품 수정 추가
     int updateProduct(ProductDTO dto);
+
 }
