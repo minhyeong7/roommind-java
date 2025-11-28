@@ -1,5 +1,6 @@
 package com.roomgenius.furniture_recommendation.mapper;
 
+import com.roomgenius.furniture_recommendation.entity.FileVO;
 import com.roomgenius.furniture_recommendation.entity.ProductDTO;
 import com.roomgenius.furniture_recommendation.entity.ProductVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +21,8 @@ public interface AdminProductMapper {
     void updateProduct(ProductDTO dto);
 
     void deleteProduct(Integer productId);
+
+    Integer getLastInsertId();
+
+    void insertFile(FileVO vo);
 }

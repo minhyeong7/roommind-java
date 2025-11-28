@@ -16,6 +16,7 @@ public class ProductDTO {
     private Integer stock;
     private String description;
 
+
     // ⭐ 여러 파일 지원 (FileService 구조와 맞춤)
     private List<MultipartFile> files;
 }

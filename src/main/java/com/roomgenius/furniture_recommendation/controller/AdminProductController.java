@@ -6,6 +6,7 @@ import com.roomgenius.furniture_recommendation.service.AdminProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -38,10 +39,20 @@ public class AdminProductController {
         return adminProductService.getProductById(id);
     }
 
-    /** 등록 */
-    @PostMapping
-    public ResponseEntity<String> insert(@RequestBody ProductDTO dto) {
-        adminProductService.addProduct(dto);
+    /* 등록 */
+    @PostMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<String> insert(
+            @RequestPart("product") ProductDTO dto,
+            @RequestPart(value = "file", required = false) MultipartFile file
+    ) {
+        // 1) 상품 저장
+        Integer productId = adminProductService.addProduct(dto);
+
+        // 2) 파일 저장 (파일 있을 때만)
+        if (file != null && !file.isEmpty()) {
+            adminProductService.saveProductImage(productId, file);
+        }
+
         return ResponseEntity.ok("created");
     }
 
@@ -60,4 +71,7 @@ public class AdminProductController {
         adminProductService.deleteProduct(id);
         return ResponseEntity.ok("deleted");
     }
+
+
+
 }
