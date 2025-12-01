@@ -57,11 +57,24 @@ public class FileServiceImpl implements FileService {
             throw new IllegalArgumentException("이미지 파일만 업로드 가능합니다. (jpg, jpeg, png, webp, gif,avif)");
         }
 
-        // 3) MIME 타입 체크
+        // 3) MIME 타입 체크 (AVIF 대응)
         String contentType = file.getContentType();
-        if (contentType == null || !contentType.startsWith("image/")) {
+
+        if (contentType == null) {
+            throw new IllegalArgumentException("이미지 형식의 파일만 업로드할 수 있습니다. (Content-Type: null)");
+        }
+
+        // 브라우저가 AVIF를 application/octet-stream 으로 보내는 경우도 허용
+        boolean isValidMime =
+                contentType.startsWith("image/") ||
+                        contentType.equals("image/avif") ||
+                        contentType.equals("image/x-avif") ||
+                        contentType.equals("application/octet-stream");  // 일부 환경에서 AVIF가 이렇게 전송됨
+
+        if (!isValidMime) {
             throw new IllegalArgumentException("이미지 형식의 파일만 업로드할 수 있습니다. (Content-Type: " + contentType + ")");
         }
+
     }
 
     /** 실제 파일 저장 + DB insert */
