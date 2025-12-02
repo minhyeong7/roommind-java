@@ -13,6 +13,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 👉 /uploads/** URL → 실제 업로드 경로 매핑
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/uploads/");
+
+
     }
 
 }
