@@ -69,6 +69,8 @@ public class SecurityConfig {
 
 
 
+
+
                         // 네이버 검색 api
                         .requestMatchers("/api/naver/**").permitAll()
 
@@ -80,6 +82,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/qnaboards/**","/api/community/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/qnaboards/**","/api/community/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/qnaboards/**","/api/community/**").authenticated()
+
+                        // 카테고리  GET은 누구나
+                        .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+
 
                         // 관리자 전용
                         //.requestMatchers("/api/admin/**").hasRole("ADMIN")
