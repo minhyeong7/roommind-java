@@ -21,8 +21,6 @@ public class ProductVO {
     private String description;
     private String createdDate;
     private String updatedDate;
-    private String majorCategory;
-    private String middleCategory;
 
 
     private List<FileVO> images;
