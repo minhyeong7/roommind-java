@@ -60,40 +60,23 @@ VALUES
 INSERT IGNORE INTO File
 (uuid, product_id, save_dir, file_name, file_type, file_size)
 VALUES
--- 1. 모던 3인용 가죽 소파
-(UUID(), 1, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\sofa', 'sofa01.avif', 0, 0),
+(UUID(), 1, 'uploads/product/seed/sofa', 'sofa01.avif', 0, 0),
+(UUID(), 2, 'uploads/product/seed/sofa', 'sofa02.avif', 0, 0),
 
--- 2. 패브릭 컴포트 소파
-(UUID(), 2, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\sofa', 'sofa02.avif', 0, 0),
+(UUID(), 3, 'uploads/product/seed/bed', 'bed01.avif', 0, 0),
+(UUID(), 4, 'uploads/product/seed/bed', 'bed02.avif', 0, 0),
 
--- 3. 퀸사이즈 원목 침대
-(UUID(), 3, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\bed', 'bed01.avif', 0, 0),
+(UUID(), 5, 'uploads/product/seed/chair', 'chair01.avif', 0, 0),
+(UUID(), 6, 'uploads/product/seed/chair', 'chair02.avif', 0, 0),
 
--- 4. 모던 저상형 침대
-(UUID(), 4, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\bed', 'bed02.avif', 0, 0),
+(UUID(), 7, 'uploads/product/seed/table', 'table01.avif', 0, 0),
+(UUID(), 8, 'uploads/product/seed/table', 'table02.avif', 0, 0),
 
--- 5. 인체공학 메쉬 의자
-(UUID(), 5, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\chair', 'chair01.avif', 0, 0),
+(UUID(), 9, 'uploads/product/seed/tv', 'tv01.avif', 0, 0),
+(UUID(), 10, 'uploads/product/seed/tv', 'tv02.avif', 0, 0),
 
--- 6. 고급 PU 가죽 의자
-(UUID(), 6, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\chair', 'chair02.avif', 0, 0),
+(UUID(), 11, 'uploads/product/seed/fridge', 'fridge01.avif', 0, 0),
+(UUID(), 12, 'uploads/product/seed/fridge', 'fridge02.avif', 0, 0);
 
--- 7. 4인용 원목 식탁
-(UUID(), 7, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\table', 'table01.avif', 0, 0),
-
--- 8. 모던 유리 식탁
-(UUID(), 8, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\table', 'table02.avif', 0, 0),
-
--- 9. 55인치 UHD 스마트 TV
-(UUID(), 9, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\tv', 'tv01.avif', 0, 0),
-
--- 10. 65인치 QLED TV
-(UUID(), 10, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\tv', 'tv02.avif', 0, 0),
-
--- 11. 양문형 850L 냉장고
-(UUID(), 11, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\fridge', 'fridge01.avif', 0, 0),
-
--- 12. 4도어 프리미엄 냉장고
-(UUID(), 12, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\fridge', 'fridge02.avif', 0, 0);
 
 

@@ -23,5 +23,7 @@ public class ProductVO {
     private String updatedDate;
 
 
+
+
     private List<FileVO> images;
 }
