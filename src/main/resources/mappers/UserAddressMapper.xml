@@ -40,14 +40,17 @@
     </insert>
 
     <!-- 배송지 수정 -->
-    <update id="updateAddress" parameterType="com.roomgenius.furniture_recommendation.entity.UserAddressVO">
+
+    <update id="updateAddress"  parameterType="com.roomgenius.furniture_recommendation.entity.UserAddressVO">
         UPDATE user_address
         SET recipient = #{recipient},
         phone = #{phone},
         address = #{address},
-        detail_address = #{detailAddress}
+        detail_address = #{detailAddress},
+        is_default = #{isDefault}   <!-- ★ 추가 -->
         WHERE address_id = #{addressId}
     </update>
+
 
     <!-- 배송지 삭제 -->
     <delete id="deleteAddress">

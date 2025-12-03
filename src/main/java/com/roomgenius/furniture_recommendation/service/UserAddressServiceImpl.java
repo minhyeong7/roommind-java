@@ -61,17 +61,27 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
+    @Transactional
     public void updateAddress(UserAddressDTO dto) {
+
+        // 기본 배송지로 설정하면 다른 배송지 먼저 전부 해제
+        if (dto.getIsDefault() == 1) {
+            addressMapper.resetDefault(dto.getUserId());
+        }
+
         UserAddressVO vo = UserAddressVO.builder()
                 .addressId(dto.getAddressId())
+                .userId(dto.getUserId())
                 .recipient(dto.getRecipient())
                 .phone(dto.getPhone())
                 .address(dto.getAddress())
                 .detailAddress(dto.getDetailAddress())
+                .isDefault(dto.getIsDefault())  // ★ 추가
                 .build();
 
         addressMapper.updateAddress(vo);
     }
+
 
     @Override
     public void deleteAddress(Integer addressId) {
