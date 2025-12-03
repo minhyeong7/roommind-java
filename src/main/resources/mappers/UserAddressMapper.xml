@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.roomgenius.furniture_recommendation.mapper.UserAddressMapper">
+
+    <resultMap id="AddressMap" type="com.roomgenius.furniture_recommendation.entity.UserAddressVO">
+        <id property="addressId" column="address_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="recipient" column="recipient"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="detailAddress" column="detail_address"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="createdDate" column="created_date"/>
+    </resultMap>
+
+    <!-- 유저 배송지 전체 조회 -->
+    <select id="findByUserId" resultMap="AddressMap">
+        SELECT *
+        FROM user_address
+        WHERE user_id = #{userId}
+        ORDER BY is_default DESC, created_date DESC
+    </select>
+
+    <!-- 배송지 단건 조회 -->
+    <select id="findById" resultMap="AddressMap">
+        SELECT *
+        FROM user_address
+        WHERE address_id = #{addressId}
+    </select>
+
+    <!-- 배송지 추가 -->
+    <insert id="insertAddress" parameterType="com.roomgenius.furniture_recommendation.entity.UserAddressVO"
+            useGeneratedKeys="true" keyProperty="addressId">
+        INSERT INTO user_address
+        (user_id, recipient, phone, address, detail_address, is_default)
+        VALUES
+        (#{userId}, #{recipient}, #{phone}, #{address}, #{detailAddress}, #{isDefault})
+    </insert>
+
+    <!-- 배송지 수정 -->
+    <update id="updateAddress" parameterType="com.roomgenius.furniture_recommendation.entity.UserAddressVO">
+        UPDATE user_address
+        SET recipient = #{recipient},
+        phone = #{phone},
+        address = #{address},
+        detail_address = #{detailAddress}
+        WHERE address_id = #{addressId}
+    </update>
+
+    <!-- 배송지 삭제 -->
+    <delete id="deleteAddress">
+        DELETE FROM user_address
+        WHERE address_id = #{addressId}
+    </delete>
+
+    <!-- 기본 배송지 전체 해제 -->
+    <update id="resetDefault">
+        UPDATE user_address
+        SET is_default = 0
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 기본 배송지 설정 -->
+    <update id="setDefault">
+        UPDATE user_address
+        SET is_default = 1
+        WHERE address_id = #{addressId}
+    </update>
+
+    <select id="findDefaultByUserId" resultMap="AddressMap">
+        SELECT * FROM user_address
+        WHERE user_id = #{userId} AND is_default = 1
+        LIMIT 1
+    </select>
+
+
+</mapper>

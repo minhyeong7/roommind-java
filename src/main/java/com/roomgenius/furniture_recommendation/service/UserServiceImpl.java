@@ -1,14 +1,18 @@
 package com.roomgenius.furniture_recommendation.service;
 
 import com.roomgenius.furniture_recommendation.config.JwtTokenProvider;
+import com.roomgenius.furniture_recommendation.entity.UserAddressVO;
 import com.roomgenius.furniture_recommendation.entity.UserDTO;
 import com.roomgenius.furniture_recommendation.entity.UserVO;
+import com.roomgenius.furniture_recommendation.mapper.UserAddressMapper;
 import com.roomgenius.furniture_recommendation.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +21,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserAddressMapper addressMapper;
 
     // 회원가입
     @Override
@@ -39,6 +44,17 @@ public class UserServiceImpl implements UserService {
 
         userMapper.insertUser(user);
 
+        addressMapper.insertAddress(
+                UserAddressVO.builder()
+                        .userId(user.getUserId())
+                        .recipient(user.getUserName())
+                        .phone(user.getPhone())
+                        .address(user.getAddress())
+                        .detailAddress("")
+                        .isDefault(1)
+                        .build()
+        );
+
         return UserDTO.builder()
                 .userId(user.getUserId())
                 .userName(user.getUserName())
@@ -57,6 +73,20 @@ public class UserServiceImpl implements UserService {
         UserVO user = userMapper.findByEmail(dto.getEmail());
         if (user == null || !passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 일치하지 않습니다");
+        }
+
+        List<UserAddressVO> addresses = addressMapper.findByUserId(user.getUserId());
+        if (addresses.isEmpty()) {
+            addressMapper.insertAddress(
+                    UserAddressVO.builder()
+                            .userId(user.getUserId())
+                            .recipient(user.getUserName())
+                            .phone(user.getPhone())
+                            .address(user.getAddress())
+                            .detailAddress("")
+                            .isDefault(1)
+                            .build()
+            );
         }
 
         String token = jwtTokenProvider.generateToken(user.getEmail(), user.getRole());
