@@ -1,9 +1,6 @@
 package com.roomgenius.furniture_recommendation.service;
 
-import com.roomgenius.furniture_recommendation.entity.FileVO;
-import com.roomgenius.furniture_recommendation.entity.QnABoardDTO;
-import com.roomgenius.furniture_recommendation.entity.QnABoardVO;
-import com.roomgenius.furniture_recommendation.entity.UserVO;
+import com.roomgenius.furniture_recommendation.entity.*;
 import com.roomgenius.furniture_recommendation.mapper.QnABoardMapper;
 import com.roomgenius.furniture_recommendation.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -116,7 +113,7 @@ public class QnABoardServiceImpl implements QnABoardService {
             if (!existing.getUserId().equals(requestUserId))
                 throw new IllegalStateException("본인 게시글만 수정할 수 있습니다.");
 
-            QnABoardVO vo = QnABoardVO.builder()
+            QnABoardVO vo =QnABoardVO.builder()
                     .qnaBoardId(dto.getQnaBoardId())
                     .title(dto.getTitle())
                     .content(dto.getContent())
@@ -124,7 +121,7 @@ public class QnABoardServiceImpl implements QnABoardService {
 
             int result = qnABoardMapper.update(vo);
             if (result == 0)
-                throw new RuntimeException("게시글 수정 실패");
+                throw new RuntimeException("커뮤니티 게시글 수정 실패");
 
             return result;
 
@@ -133,7 +130,7 @@ public class QnABoardServiceImpl implements QnABoardService {
             throw e;
         } catch (Exception e) {
             log.error("❌ 수정 중 오류", e);
-            throw new RuntimeException("게시글 수정 중 서버 오류 발생");
+            throw new RuntimeException("커뮤니티 게시글 수정 중 서버 오류 발생");
         }
     }
 
