@@ -16,9 +16,6 @@ VALUES
 ('디지털', '전자레인지');
 
 
-
-
-
 -- ===========================
 -- Product Seed Data
 -- ===========================
@@ -54,46 +51,62 @@ VALUES
 -- ===========================
 -- File Seed Data
 -- ===========================
--- ===========================
--- File Seed Data
--- ===========================
-INSERT IGNORE INTO File
-(uuid, product_id, save_dir, file_name, file_type, file_size)
-VALUES
--- 1. 모던 3인용 가죽 소파
-(UUID(), 1, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\sofa', 'sofa01.avif', 0, 0),
 
--- 2. 패브릭 컴포트 소파
-(UUID(), 2, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\sofa', 'sofa02.avif', 0, 0),
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/sofa', 'sofa01.avif', 0, 0
+FROM Product p WHERE p.product_name = '모던 3인용 가죽 소파';
 
--- 3. 퀸사이즈 원목 침대
-(UUID(), 3, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\bed', 'bed01.avif', 0, 0),
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/sofa', 'sofa02.avif', 0, 0
+FROM Product p WHERE p.product_name = '패브릭 컴포트 소파';
 
--- 4. 모던 저상형 침대
-(UUID(), 4, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\bed', 'bed02.avif', 0, 0),
 
--- 5. 인체공학 메쉬 의자
-(UUID(), 5, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\chair', 'chair01.avif', 0, 0),
+-- 침대
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/bed', 'bed01.avif', 0, 0
+FROM Product p WHERE p.product_name = '퀸사이즈 원목 침대';
 
--- 6. 고급 PU 가죽 의자
-(UUID(), 6, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\chair', 'chair02.avif', 0, 0),
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/bed', 'bed02.avif', 0, 0
+FROM Product p WHERE p.product_name = '모던 저상형 침대';
 
--- 7. 4인용 원목 식탁
-(UUID(), 7, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\table', 'table01.avif', 0, 0),
 
--- 8. 모던 유리 식탁
-(UUID(), 8, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\table', 'table02.avif', 0, 0),
+-- 의자
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/chair', 'chair01.avif', 0, 0
+FROM Product p WHERE p.product_name = '인체공학 메쉬 의자';
 
--- 9. 55인치 UHD 스마트 TV
-(UUID(), 9, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\tv', 'tv01.avif', 0, 0),
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/chair', 'chair02.avif', 0, 0
+FROM Product p WHERE p.product_name = '고급 PU 가죽 의자';
 
--- 10. 65인치 QLED TV
-(UUID(), 10, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\tv', 'tv02.avif', 0, 0),
 
--- 11. 양문형 850L 냉장고
-(UUID(), 11, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\fridge', 'fridge01.avif', 0, 0),
+-- 식탁
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/table', 'table01.avif', 0, 0
+FROM Product p WHERE p.product_name = '4인용 원목 식탁';
 
--- 12. 4도어 프리미엄 냉장고
-(UUID(), 12, 'C:\\Users\\admin\\Desktop\\furniture-recommendation\\uploads\\product\\seed\\fridge', 'fridge02.avif', 0, 0);
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/table', 'table02.avif', 0, 0
+FROM Product p WHERE p.product_name = '모던 유리 식탁';
 
+
+-- TV
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tv', 'tv01.avif', 0, 0
+FROM Product p WHERE p.product_name = '55인치 UHD 스마트 TV';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tv', 'tv02.avif', 0, 0
+FROM Product p WHERE p.product_name = '65인치 QLED TV';
+
+
+-- 냉장고
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/fridge', 'fridge01.avif', 0, 0
+FROM Product p WHERE p.product_name = '양문형 850L 냉장고';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/fridge', 'fridge02.avif', 0, 0
+FROM Product p WHERE p.product_name = '4도어 프리미엄 냉장고';
 

@@ -26,5 +26,7 @@ public class ProductVO {
     private String middleCategory;
 
 
+
+
     private List<FileVO> images;
 }
