@@ -1,10 +1,7 @@
 package com.roomgenius.furniture_recommendation.controller;
 
 import com.roomgenius.furniture_recommendation.config.JwtTokenProvider;
-import com.roomgenius.furniture_recommendation.entity.FileVO;
-import com.roomgenius.furniture_recommendation.entity.QnABoardDTO;
-import com.roomgenius.furniture_recommendation.entity.QnABoardVO;
-import com.roomgenius.furniture_recommendation.entity.UserVO;
+import com.roomgenius.furniture_recommendation.entity.*;
 import com.roomgenius.furniture_recommendation.service.FileService;
 import com.roomgenius.furniture_recommendation.service.QnABoardService;
 import com.roomgenius.furniture_recommendation.service.UserService;
@@ -109,7 +106,7 @@ public class QnABoardController {
 
         dto.setQnaBoardId(boardId);
 
-        // 🔥 본인 검증 + 수정 → Service에서 처리
+        // 본인 검증 + 수정
         qnABoardService.update(dto, user.getUserId());
 
         // 이미지 교체
@@ -117,8 +114,8 @@ public class QnABoardController {
 
         if (images != null && !images.isEmpty()) {
             replaced = true;
-            fileService.deleteQnaFiles(boardId);
-            fileService.uploadQnaFiles(boardId, images);
+            fileService.deleteCommunityFiles(boardId);
+            fileService.uploadCommunityFiles(boardId, images);
         }
 
         return ResponseEntity.ok(Map.of(
@@ -127,7 +124,6 @@ public class QnABoardController {
                 "imagesReplaced", replaced
         ));
     }
-
     /** ==================== 게시글 삭제 ==================== */
     @DeleteMapping("/{boardId}")
     public ResponseEntity<?> deleteBoard(

@@ -1,5 +1,6 @@
 package com.roomgenius.furniture_recommendation.service;
 
+import com.roomgenius.furniture_recommendation.entity.CommunityBoardDTO;
 import com.roomgenius.furniture_recommendation.entity.QnABoardDTO;
 import com.roomgenius.furniture_recommendation.entity.QnABoardVO;
 
