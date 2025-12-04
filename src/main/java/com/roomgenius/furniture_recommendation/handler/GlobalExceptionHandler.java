@@ -82,4 +82,17 @@ public class GlobalExceptionHandler {
         error.put("message", "서버 내부 오류가 발생했습니다.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
+
+    /** 🆕 리뷰 권한 문제 등 일반 RuntimeException 처리 */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
+        log.warn(" RuntimeException 발생: {}", ex.getMessage());
+
+        Map<String, Object> error = new HashMap<>();
+        error.put("success", false);
+        error.put("message", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
 }
