@@ -82,19 +82,20 @@
             useGeneratedKeys="true"
             keyProperty="categoryId">
 
+        <!-- ⭐ 먼저 sortOrder 계산해서 VO.sortOrder에 넣어줌 -->
+        <selectKey keyProperty="sortOrder" resultType="int" order="BEFORE">
+            SELECT IFNULL(MAX(sort_order), 0) + 1
+            FROM category
+            WHERE major_category = #{majorCategory}
+        </selectKey>
+
         INSERT INTO category
         (major_category, middle_category, sort_order)
         VALUES
-        (
-        #{majorCategory},
-        #{middleCategory},
-
-        (SELECT IFNULL(MAX(sort_order), 0) + 1
-        FROM category
-        WHERE major_category = #{majorCategory})
-        )
+        (#{majorCategory}, #{middleCategory}, #{sortOrder})
 
     </insert>
+
 
 
     <!-- =============================== -->
@@ -128,15 +129,12 @@
     <!-- =============================== -->
     <!--  정렬 업데이트 -->
     <!-- =============================== -->
-    <update id="updateOrder"
-            parameterType="com.roomgenius.furniture_recommendation.entity.CategoryVO">
-
+    <update id="updateOrder">
         UPDATE category
-        SET
-        sort_order = #{orderNo}
+        SET sort_order = #{sortOrder}
         WHERE category_id = #{categoryId}
-
     </update>
+
 
 
 </mapper>

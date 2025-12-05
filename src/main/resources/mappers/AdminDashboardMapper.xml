@@ -5,41 +5,48 @@
 
 <mapper namespace="com.roomgenius.furniture_recommendation.mapper.AdminDashboardMapper">
 
+    <!-- 총 회원 수 -->
     <select id="getTotalUsers" resultType="int">
         SELECT COUNT(*) FROM user
     </select>
 
+    <!-- 총 상품 수 -->
     <select id="getTotalProducts" resultType="int">
         SELECT COUNT(*) FROM product
     </select>
 
+    <!-- 총 주문 수 -->
     <select id="getTotalOrders" resultType="int">
         SELECT COUNT(*) FROM orders
     </select>
 
+    <!-- 총 매출 -->
     <select id="getTotalRevenue" resultType="int">
-        SELECT COALESCE(SUM(total_price), 0)
-        FROM orders
+        SELECT COALESCE(SUM(total_price), 0) FROM orders
     </select>
 
+    <!-- 오늘 주문 -->
     <select id="getTodayOrders" resultType="int">
         SELECT COUNT(*)
         FROM orders
         WHERE DATE(created_date) = CURRENT_DATE
     </select>
 
+    <!-- 오늘 매출 -->
     <select id="getTodayRevenue" resultType="int">
         SELECT COALESCE(SUM(total_price), 0)
         FROM orders
         WHERE DATE(created_date) = CURRENT_DATE
     </select>
 
+    <!-- 미답변 Q&A -->
     <select id="getPendingQna" resultType="int">
         SELECT COUNT(*)
         FROM qnaboard
         WHERE answer IS NULL
     </select>
 
+    <!-- 재고 부족 상품 -->
     <select id="getLowStockProducts"
             resultType="com.roomgenius.furniture_recommendation.entity.LowStockProductVO">
         SELECT
@@ -51,5 +58,27 @@
         ORDER BY stock ASC
     </select>
 
+    <!-- 전체 Q&A 개수 -->
+    <select id="getTotalQna" resultType="int">
+        SELECT COUNT(*) FROM qnaboard
+    </select>
+
+    <!-- 커뮤니티 총 글 수 -->
+    <select id="getTotalCommunityPosts" resultType="int">
+        SELECT COUNT(*) FROM communityboard
+    </select>
+
+    <!-- 최근 커뮤니티 5개 -->
+    <select id="getRecentCommunityPosts"
+            resultType="com.roomgenius.furniture_recommendation.entity.CommunityPostVO">
+        SELECT
+        community_board_id AS communityBoardId,
+        title,
+        user_id AS userId,
+        created_date AS createdDate
+        FROM communityboard
+        ORDER BY created_date DESC
+        LIMIT 5
+    </select>
 
 </mapper>

@@ -26,6 +26,11 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         dto.setPendingQna(mapper.getPendingQna());
         dto.setLowStockProducts(mapper.getLowStockProducts());
 
+        dto.setTotalQna(mapper.getTotalQna());
+        dto.setTotalCommunityPosts(mapper.getTotalCommunityPosts());
+        dto.setRecentCommunityPosts(mapper.getRecentCommunityPosts());
+
+
         return dto;
     }
 }

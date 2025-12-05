@@ -1,5 +1,6 @@
 package com.roomgenius.furniture_recommendation.mapper;
 
+import com.roomgenius.furniture_recommendation.entity.CommunityPostVO;
 import com.roomgenius.furniture_recommendation.entity.LowStockProductVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,9 @@ public interface AdminDashboardMapper {
     int getPendingQna();
 
     List<LowStockProductVO> getLowStockProducts();
+
+    int getTotalQna();
+    int getTotalCommunityPosts();
+    List<CommunityPostVO> getRecentCommunityPosts();
+
 }
