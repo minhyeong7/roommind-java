@@ -56,6 +56,8 @@ public class SecurityConfig {
                         .requestMatchers("/oauth/**", "/social/**").permitAll()
 
                         .requestMatchers("/admin/**").permitAll()
+                        .requestMatchers("/api/admin/**").permitAll()
+
 
                         //카테고리 crud허용 (관리자 포함)
                         .requestMatchers("/api/categories/**").permitAll()
