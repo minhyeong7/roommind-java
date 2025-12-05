@@ -46,11 +46,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void updateOrder(List<CategoryVO> orderList) {
-
         for (CategoryVO vo : orderList) {
-            categoryMapper.updateOrder(vo.getCategoryId(), vo.getOrderNo());
+            categoryMapper.updateOrder(vo.getCategoryId(), vo.getSortOrder());
         }
     }
+
 
 }
 

@@ -13,7 +13,13 @@ VALUES
 ('가구', '식탁'),
 ('디지털', 'TV'),
 ('디지털', '냉장고'),
-('디지털', '전자레인지');
+('디지털', '전자레인지'),
+('가구', '거울'),
+('가구', '화장대'),
+('가구', '서랍'),
+('가구', '스탠드'),
+('패브릭', '침구(이불세트)'),
+('크리스마스', '트리');
 
 
 -- ===========================
@@ -95,9 +101,101 @@ VALUES
 (6, '레트로 미니 냉장고 121L', '레트로', 189000, 169000, 22, '감성 디자인의 121L 미니 냉장고'),
 (6, '샤인 멀티냉각 507L 일반 냉장고', '샤인', 610000, 569000, 10, '멀티냉각 시스템 507L 일반 냉장고'),
 (6, '모드비 312L 피트인 콤비냉장고', '모드비', 540000, 499000, 16, '4컬러 파스텔 피트인 콤비냉장고'),
-(6, '스탠드형 슈퍼슬림 김치냉장고 80L', 'ARK', 330000, 299000, 17, '슈퍼슬림 80L 김치냉장고'),
+(6, '슈퍼슬림 김치냉장고 80L', 'ARK', 330000, 299000, 17, '스탠드형 슈퍼슬림 80L 김치냉장고'),
 (6, '레트로 85L 미니 냉장고', '레트로', 159000, 139000, 23, '2도어 소형 미니 냉장고'),
-(6, '155L 스탠드 냉동고', 'CFZ', 290000, 259000, 18, '간접 냉각 시스템 155L 냉동고');
+(6, '155L 스탠드 냉동고', 'CFZ', 290000, 259000, 18, '간접 냉각 시스템 155L 냉동고'),
+
+
+-- 디지털 - 전자레인지 (category_id = 7)
+(7, '20L 무회전 전자레인지', 'CMW', 109000, 89000, 18, '무회전 설계의 20L 전자레인지'),
+(7, '쿠첸 클래식 레트로 전자레인지', '쿠첸', 139000, 129000, 15, '감성 디자인의 레트로 전자레인지'),
+(7, '23L 스마트 인버터 전자레인지', 'LG', 159000, 149000, 20, '23L 용량의 스마트 인버터 전자레인지'),
+(7, '23L 오브제 전자레인지', 'LG 오브제', 179000, 169000, 14, '오브제컬렉션 디자인 23L 전자레인지'),
+(7, '20L 레트로 전자레인지', 'MC', 119000, 109000, 22, '미니 사이즈의 20L 레트로 전자레인지'),
+(7, '20L 버튼식 전자레인지', 'RMW', 129000, 119000, 17, '고급형 버튼식 20L 전자레인지'),
+(7, '20L 레트로 버튼식 전자레인지', 'MM', 125000, 115000, 19, '원룸에 적합한 미니 레트로 버튼식 모델'),
+(7, '20L 전자레인지 프로 모델', 'JRK', 140000, 110000, 16, '20L 용량의 프로 전자레인지'),
+(7, '23L 다이얼 전자레인지', 'CMW', 115000, 81000, 21, '대용량 23L 다이얼 방식 전자레인지'),
+(7, '23L 비스포크 전자레인지', '삼성', 199000, 179000, 12, '비스포크 디자인의 23L 전자레인지'),
+
+
+-- 가구 - 전신거울 (category_id = 8)
+(8, '3사이즈 전신거울', '미러즈', 79000, 69000, 20, '300·400·600 사이즈 선택 가능한 심플 전신거울'),
+(8, '노프레임 미드센추리 전신거울', '포니', 119000, 99000, 14, '비산방지 처리된 알루미늄 프레임 전신거울'),
+(8, '1200 와이드 이동식 전신거울', '올타', 159000, 145000, 12, '이동식 스탠드 구조의 1200 와이드 거울'),
+(8, '웨이브 와이드 전신거울', 'e스마트', 139000, 129000, 18, '트렌디한 물결 웨이브 디자인의 대형 전신거울'),
+(8, '아치형 노프레임 전신거울', '어반', 129000, 115000, 17, '300~800mm 선택 가능한 아치형 전신거울'),
+(8, '도브 전신거울 수납 화장대', '도브', 129000, 99900, 16, '틈새 수납 가능한 화장대 겸용 전신거울'),
+(8, '시그니쳐 거치형 전신거울', '시그니쳐', 110000, 99000, 15, '3컬러 구성의 스탠드형 전신거울'),
+(8, '페이트 아치형 스탠드 거울', '페이트', 89000, 52155, 22, '600·700·800 사이즈 미드센추리 아치형 전신거울'),
+(8, '대형 와이드 스탠드 전신거울', '와이드미러', 159000, 139000, 14, '700/1000 선택 가능한 대형 와이드 전신거울'),
+(8, '강화 안전 전신거울', '세이프미러', 79000, 69000, 25, '비산·파손 방지 강화 안전 전신거울'),
+
+
+-- 가구 - 화장대 (category_id = 9)
+(9, '루나 600 수납 화장대', '루나', 129000, 115000, 16, '3컬러 선택 가능한 600 사이즈 수납 화장대'),
+(9, '스완A 원목 콘솔 화장대', '스완A', 189000, 169000, 12, '거울·스툴 옵션 선택 가능한 원목 콘솔 화장대'),
+(9, '오블릭 미니 수납 화장대 900', '오블릭', 159000, 139000, 18, '국내 제작 900size 서랍 수납 화장대'),
+(9, '오로르 템바보드 화장대 세트', '오로르', 179000, 159000, 14, 'E0 템바보드 구조의 거울 세트 화장대'),
+(9, '코코2 확장형 수납 화장대', '코코', 149000, 135000, 20, '거울 포함 확장형 구조 수납 화장대'),
+(9, '에스티 하이그로시 화장대', '에스티', 159000, 145000, 17, '가로폭 조절 가능한 하이그로시 화장대'),
+(9, '엔틱 원목 수납 화장대', '엔틱', 219000, 199000, 11, '수납장/뷰로/거울/스툴 구성 선택 가능'),
+(9, '모던 글래스 미니 화장대 600', '모던글래스', 139000, 125000, 19, '600 사이즈의 유리포인트 미니 화장대'),
+(9, '클래식 라운드 원목 화장대', '클래식', 189000, 169000, 13, '원목 라운드 거울 포함 선반·수납 화장대'),
+(9, '스완 와이드 수납 화장대', '스완', 99000, 74900, 22, '와이드 거울 포함된 원목 수납 화장대'),
+
+
+-- 가구 - 서랍장 (category_id = 10)
+(10, '레이어 모듈 철제 서랍장', '레이어', 129000, 115000, 18, '400~1200 선택 가능한 미드센츄리 철제 서랍장'),
+(10, '피트 빈티지 캐비넷 서랍장', '피트', 159000, 145000, 14, '2~5단 구성의 빈티지 스타일 캐비넷'),
+(10, '토리 와이드 3단 서랍장', '토리', 139000, 125000, 17, '800/1200 선택 가능한 와이드형 서랍장'),
+(10, '피하 4단 서랍장', '피하', 119000, 105000, 20, '심플한 디자인의 4단 기본형 서랍장'),
+(10, '모라 템바 와이드 서랍장', '모라', 179000, 165000, 12, '3/5단 선택 가능한 템바보드 와이드 서랍장'),
+(10, '헤이즐 다단 서랍장', '헤이즐', 149000, 135000, 16, '3단/6단/7단 구성의 기본형 서랍장'),
+(10, '맥시멈마카롱 속깊은 와이드 서랍장', '마카롱', 189000, 169000, 10, '600·800 사이즈 깊은 수납 와이드 서랍장'),
+(10, '나오미 7단 와이드 서랍장', '나오미', 169000, 149000, 13, '6colors 구성의 대형 와이드 서랍장'),
+(10, '메가 칸칸이 5단 서랍장', '메가', 159000, 139000, 18, '5컬러 선택 가능한 5단 칸칸이 서랍장'),
+(10, '프롬 3단 와이드 서랍장', '프롬', 139000, 125000, 15, '800/1200 선택 가능한 E0 등급 서랍장'),
+
+
+-- 가구 - 스탠드 조명 (category_id = 11)
+(11, '캐슬 장스탠드 조명', '캐슬', 129000, 113400, 18, '쿠폰 적용 가능한 미니멀 장스탠드 조명'),
+(11, '스프링 플로어 인테리어 스탠드', '스프링', 89000, 79000, 20, '6colors 구성의 플로어/식물재배 스탠드'),
+(11, '더블레이어 120 장스탠드', '더블레이어', 159000, 149000, 14, '3colors 선택 가능한 120cm 장스탠드'),
+(11, '머쉬룸 장스탠드 조명', '머쉬룸', 99000, 89000, 16, '국내 제작 7colors 전구 증정 스탠드 조명'),
+(11, '아르코 스틸 실버 장스탠드', '아르코', 139000, 125000, 13, '활장램프 타입의 스틸 실버 장스탠드'),
+(11, '블랑드문 아크릴 장스탠드', '블랑드문', 159000, 145000, 17, '투명 아크릴 재질의 5colors 스탠드 조명'),
+(11, '레이어 플로어 램프', '레이어', 119000, 105000, 20, '인테리어용 모던 플로어 스탠드 램프'),
+(11, '미니아일랜드 장스탠드', '미니아일랜드', 59000, 38610, 22, 'LED 전구 증정 미니멀 장스탠드 조명'),
+(11, '코니 아일랜드 장스탠드', '코니', 52000, 33210, 25, '3단 조립형 장스탠드 조명'),
+(11, '알렉스 장스탠드', '알렉스', 99000, 89000, 15, '2colors 구성의 베이직 장스탠드'),
+
+
+-- 가구 - 차렵이불 (category_id = 12)
+(12, '카스테라 워싱 옥수수솜 차렵이불세트', '카스테라', 129000, 115000, 20, '사계절/한파용 극세사 워싱 차렵이불세트'),
+(12, '호텔침구 클린코튼 옥수수솜 이불세트', '클린코튼', 139000, 125000, 18, '사계절 및 겨울용 고밀도 60수 호텔식 이불'),
+(12, '유어메이트 항균 차렵이불 풀세트', '유어메이트', 119000, 105000, 22, '항균 소재의 겨울/사계절 15컬러 이불'),
+(12, '빌리호텔 사계절 극세사 차렵이불세트', '빌리호텔', 109000, 98000, 16, '8colors 먼지없는 극세사 차렵이불'),
+(12, '프렌치 스트라이프 옥수수솜 이불 S/SS', '프렌치', 99000, 89000, 14, '사계절용 클래식 프렌치 스트라이프 디자인'),
+(12, '카스테라 스트라이프 한파용 차렵이불', '카스테라', 149000, 135000, 13, '워싱 스트라이프 한파용 극세사 차렵이불'),
+(12, '수플레 겨울 극세사 옥수수솜 이불세트', '수플레', 139000, 125000, 17, '11컬러 구성의 겨울용 극세사 차렵이불'),
+(12, '돈워리 알러지케어 유칼립투스솜 이불', '돈워리', 119000, 105000, 21, '극세사·알러지케어 사계절 이불세트'),
+(12, '가드M2 사계절 극세사 차렵이불세트', '가드M2', 109000, 95000, 19, '12color 구성의 항알러지 극세사 이불세트'),
+(12, '도즈 60수 순면 사계절 차렵이불세트', '도즈', 129000, 115000, 15, '간절기/사계절용 60수 순면 차렵이불'),
+
+
+-- 크리스마스 트리 (category_id = 13)
+(13, '하이엔드 피시본 투톤 무장식 대형 트리', '피시본', 159000, 145000, 20, '120~210cm 투톤 컬러의 고급 무장식 크리스마스 트리'),
+(13, '클래식 LED 자작나무 트리', '클래식', 89000, 79000, 22, '60~180cm LED 무드등 일체형 자작나무 트리'),
+(13, '화이트 스케치 스노우 PE 전나무 트리', '스케치', 179000, 165000, 18, '120~210cm 대형 화이트 스노우 무장식 트리'),
+(13, '팝업트리 로얄 원터치 접이식 트리 풀세트', '팝업트리', 119000, 105000, 25, '2size 원터치 업다운 크리스마스 트리 풀세트'),
+(13, '팝업트리 오리지널 캐슬 원터치 트리 풀세트', '팝업트리', 109000, 98000, 20, '2size 업다운 원터치 크리스마스 트리 풀세트'),
+(13, '올인원 원터치 크리스마스 트리', '올인원', 129000, 115000, 19, '10초 설치/해체 가능한 원터치 트리'),
+(13, '트리 장식 풀세트 6종', '장식세트', 99000, 89000, 17, '1.2~1.5M 구성의 크리스마스트리 장식 풀세트'),
+(13, '하이엔드 피시본 그린 무장식 대형 트리', '피시본', 159000, 145000, 15, '120~210cm 고급 피시본 그린 무장식 트리'),
+(13, 'LED탑별 장식 풀세트 트리', 'LED트리', 139000, 125000, 21, '1.3~1.9m LED + 장식 + 탑별 올인원 풀세트'),
+(13, '원터치 블랙트리 180cm 풀세트', '블랙트리', 119000, 105000, 23, '접이식 5초 완성 180cm 블랙트리 + 보관백 포함');
+
 
 
 -- ===========================
@@ -360,3 +458,300 @@ FROM Product p WHERE p.product_name = '레트로 85L 미니 냉장고';
 INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
 SELECT UUID(), p.product_id, 'uploads/product/seed/fridge', 'fridge10.avif', 0, 0
 FROM Product p WHERE p.product_name = '155L 스탠드 냉동고';
+
+
+-- ===== 카테고리 7 : 전자레인지 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range01.avif', 0, 0
+FROM Product p WHERE p.product_name = '20L 무회전 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range02.avif', 0, 0
+FROM Product p WHERE p.product_name = '쿠첸 클래식 레트로 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range03.avif', 0, 0
+FROM Product p WHERE p.product_name = '23L 스마트 인버터 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range04.avif', 0, 0
+FROM Product p WHERE p.product_name = '23L 오브제 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range05.avif', 0, 0
+FROM Product p WHERE p.product_name = '20L 레트로 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range06.avif', 0, 0
+FROM Product p WHERE p.product_name = '20L 버튼식 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range07.avif', 0, 0
+FROM Product p WHERE p.product_name = '20L 레트로 버튼식 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range08.avif', 0, 0
+FROM Product p WHERE p.product_name = '20L 전자레인지 프로 모델';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range09.avif', 0, 0
+FROM Product p WHERE p.product_name = '23L 다이얼 전자레인지';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/range', 'range10.avif', 0, 0
+FROM Product p WHERE p.product_name = '23L 비스포크 전자레인지';
+
+
+
+-- ===== 카테고리 8 : 거울 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror01.avif', 0, 0
+FROM Product p WHERE p.product_name = '3사이즈 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror02.avif', 0, 0
+FROM Product p WHERE p.product_name = '노프레임 미드센추리 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror03.avif', 0, 0
+FROM Product p WHERE p.product_name = '1200 와이드 이동식 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror04.avif', 0, 0
+FROM Product p WHERE p.product_name = '웨이브 와이드 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror05.avif', 0, 0
+FROM Product p WHERE p.product_name = '아치형 노프레임 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror06.avif', 0, 0
+FROM Product p WHERE p.product_name = '도브 전신거울 수납 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror07.avif', 0, 0
+FROM Product p WHERE p.product_name = '시그니쳐 거치형 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror08.avif', 0, 0
+FROM Product p WHERE p.product_name = '페이트 아치형 스탠드 거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror09.avif', 0, 0
+FROM Product p WHERE p.product_name = '대형 와이드 스탠드 전신거울';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/mirror', 'mirror10.avif', 0, 0
+FROM Product p WHERE p.product_name = '강화 안전 전신거울';
+
+
+
+
+-- ===== 카테고리 9 : 화장대 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd01.avif', 0, 0
+FROM Product p WHERE p.product_name = '루나 600 수납 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd02.avif', 0, 0
+FROM Product p WHERE p.product_name = '스완A 원목 콘솔 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd03.avif', 0, 0
+FROM Product p WHERE p.product_name = '오블릭 미니 수납 화장대 900';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd04.avif', 0, 0
+FROM Product p WHERE p.product_name = '오로르 템바보드 화장대 세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd05.avif', 0, 0
+FROM Product p WHERE p.product_name = '코코2 확장형 수납 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd06.avif', 0, 0
+FROM Product p WHERE p.product_name = '에스티 하이그로시 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd07.avif', 0, 0
+FROM Product p WHERE p.product_name = '엔틱 원목 수납 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd08.avif', 0, 0
+FROM Product p WHERE p.product_name = '모던 글래스 미니 화장대 600';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd09.avif', 0, 0
+FROM Product p WHERE p.product_name = '클래식 라운드 원목 화장대';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/hjd', 'hjd10.avif', 0, 0
+FROM Product p WHERE p.product_name = '스완 와이드 수납 화장대';
+
+
+-- ===== 카테고리 10 : 서랍장 File 매핑 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer01.avif', 0, 0
+FROM Product p WHERE p.product_name = '레이어 모듈 철제 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer02.avif', 0, 0
+FROM Product p WHERE p.product_name = '피트 빈티지 캐비넷 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer03.avif', 0, 0
+FROM Product p WHERE p.product_name = '토리 와이드 3단 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer04.avif', 0, 0
+FROM Product p WHERE p.product_name = '피하 4단 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer05.avif', 0, 0
+FROM Product p WHERE p.product_name = '모라 템바 와이드 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer06.avif', 0, 0
+FROM Product p WHERE p.product_name = '헤이즐 다단 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer07.avif', 0, 0
+FROM Product p WHERE p.product_name = '맥시멈마카롱 속깊은 와이드 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer08.avif', 0, 0
+FROM Product p WHERE p.product_name = '나오미 7단 와이드 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer09.avif', 0, 0
+FROM Product p WHERE p.product_name = '메가 칸칸이 5단 서랍장';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/drawer', 'drawer10.avif', 0, 0
+FROM Product p WHERE p.product_name = '프롬 3단 와이드 서랍장';
+
+
+-- ===== 카테고리 11 : 스탠드 조명 File 매핑 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand01.avif', 0, 0
+FROM Product p WHERE p.product_name = '캐슬 장스탠드 조명';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand02.avif', 0, 0
+FROM Product p WHERE p.product_name = '스프링 플로어 인테리어 스탠드';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand03.avif', 0, 0
+FROM Product p WHERE p.product_name = '더블레이어 120 장스탠드';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand04.avif', 0, 0
+FROM Product p WHERE p.product_name = '머쉬룸 장스탠드 조명';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand05.avif', 0, 0
+FROM Product p WHERE p.product_name = '아르코 스틸 실버 장스탠드';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand06.avif', 0, 0
+FROM Product p WHERE p.product_name = '블랑드문 아크릴 장스탠드';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand07.avif', 0, 0
+FROM Product p WHERE p.product_name = '레이어 플로어 램프';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand08.avif', 0, 0
+FROM Product p WHERE p.product_name = '미니아일랜드 장스탠드';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand09.avif', 0, 0
+FROM Product p WHERE p.product_name = '코니 아일랜드 장스탠드';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/stand', 'stand10.avif', 0, 0
+FROM Product p WHERE p.product_name = '알렉스 장스탠드';
+
+
+-- ===== 카테고리 12 : 차렵이불 File 매핑 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul01.avif', 0, 0
+FROM Product p WHERE p.product_name = '카스테라 워싱 옥수수솜 차렵이불세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul02.avif', 0, 0
+FROM Product p WHERE p.product_name = '호텔침구 클린코튼 옥수수솜 이불세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul03.avif', 0, 0
+FROM Product p WHERE p.product_name = '유어메이트 항균 차렵이불 풀세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul04.avif', 0, 0
+FROM Product p WHERE p.product_name = '빌리호텔 사계절 극세사 차렵이불세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul05.avif', 0, 0
+FROM Product p WHERE p.product_name = '프렌치 스트라이프 옥수수솜 이불 S/SS';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul06.avif', 0, 0
+FROM Product p WHERE p.product_name = '카스테라 스트라이프 한파용 차렵이불';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul07.avif', 0, 0
+FROM Product p WHERE p.product_name = '수플레 겨울 극세사 옥수수솜 이불세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul08.avif', 0, 0
+FROM Product p WHERE p.product_name = '돈워리 알러지케어 유칼립투스솜 이불';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul09.avif', 0, 0
+FROM Product p WHERE p.product_name = '가드M2 사계절 극세사 차렵이불세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/ibul', 'ibul10.avif', 0, 0
+FROM Product p WHERE p.product_name = '도즈 60수 순면 사계절 차렵이불세트';
+
+
+-- ===== 크리스마스트리 File 매핑 =====
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree01.avif', 0, 0
+FROM Product p WHERE p.product_name = '하이엔드 피시본 투톤 무장식 대형 트리';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree02.avif', 0, 0
+FROM Product p WHERE p.product_name = '클래식 LED 자작나무 트리';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree03.avif', 0, 0
+FROM Product p WHERE p.product_name = '화이트 스케치 스노우 PE 전나무 트리';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree04.avif', 0, 0
+FROM Product p WHERE p.product_name = '팝업트리 로얄 원터치 접이식 트리 풀세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree05.avif', 0, 0
+FROM Product p WHERE p.product_name = '팝업트리 오리지널 캐슬 원터치 트리 풀세트';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree06.avif', 0, 0
+FROM Product p WHERE p.product_name = '올인원 원터치 크리스마스 트리';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree07.avif', 0, 0
+FROM Product p WHERE p.product_name = '트리 장식 풀세트 6종';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree08.avif', 0, 0
+FROM Product p WHERE p.product_name = '하이엔드 피시본 그린 무장식 대형 트리';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree09.avif', 0, 0
+FROM Product p WHERE p.product_name = 'LED탑별 장식 풀세트 트리';
+
+INSERT IGNORE INTO File (uuid, product_id, save_dir, file_name, file_type, file_size)
+SELECT UUID(), p.product_id, 'uploads/product/seed/tree', 'tree10.avif', 0, 0
+FROM Product p WHERE p.product_name = '원터치 블랙트리 180cm 풀세트';

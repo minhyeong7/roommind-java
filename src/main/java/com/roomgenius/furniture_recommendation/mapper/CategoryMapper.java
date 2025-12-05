@@ -21,7 +21,8 @@ public interface CategoryMapper {
 
     int deleteCategory(Integer categoryId);
 
+    // 정렬 업데이트용
     void updateOrder(@Param("categoryId") Integer categoryId,
-                     @Param("orderNo") Integer orderNo);
+                     @Param("sortOrder") Integer sortOrder);
 }
 
