@@ -85,4 +85,24 @@
         WHERE order_id = #{orderId}
     </update>
 
+    <!-- 주문 상품 목록 조회 (재고 감소용) -->
+    <select id="selectOrderItems" resultType="com.roomgenius.furniture_recommendation.entity.OrderItemDTO">
+        SELECT
+        order_id,
+        product_id,
+        price,
+        quantity
+        FROM Order_Detail
+        WHERE order_id = #{orderId}
+    </select>
+
+    <!-- Product 재고 감소 -->
+    <update id="decreaseStock">
+        UPDATE Product
+        SET stock = stock - #{quantity}
+        WHERE product_id = #{productId}
+        AND stock >= #{quantity}
+    </update>
+
+
 </mapper>

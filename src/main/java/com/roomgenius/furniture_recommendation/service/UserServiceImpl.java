@@ -192,6 +192,16 @@ public class UserServiceImpl implements UserService {
         userMapper.updatePassword(user);
     }
 
+    // 이메일로 userId만 조회
+    @Override
+    public Integer findIdByEmail(String email) {
+        Integer userId = userMapper.findIdByEmail(email);
+        if (userId == null) {
+            throw new IllegalArgumentException("회원을 찾을 수 없습니다: " + email);
+        }
+        return userId;
+    }
+
 
 
 }

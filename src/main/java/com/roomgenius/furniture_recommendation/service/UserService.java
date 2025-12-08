@@ -22,4 +22,7 @@ public interface UserService {
     UserDTO updateUser(UserDTO dto);
 
     void changePassword(String email, String currentPw, String newPw);
+
+    // ⭐⭐ 여기 새로 추가
+    Integer findIdByEmail(String email);
 }

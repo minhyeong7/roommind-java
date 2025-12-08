@@ -28,4 +28,8 @@ public interface UserMapper {
     void updateUser(UserVO user);
 
     void updatePassword(UserVO user);
+
+    Integer findIdByEmail(@Param("email") String email);
+
+
 }

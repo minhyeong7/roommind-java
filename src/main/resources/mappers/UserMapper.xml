@@ -90,5 +90,12 @@
         WHERE email = #{email}
     </update>
 
+    <!-- 이메일 → user_id 조회 (JWT 필터에서 필수) -->
+    <select id="findIdByEmail" parameterType="string" resultType="int">
+        SELECT user_id
+        FROM User
+        WHERE email = #{email}
+    </select>
+
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.roomgenius.furniture_recommendation.config;
 
+import com.roomgenius.furniture_recommendation.mapper.UserMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import java.util.Collections;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserMapper userMapper; // ⭐ userId 조회용
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -30,17 +32,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         try {
-            // 1. Request Header에서 JWT 토큰 추출
             String token = getJwtFromRequest(request);
 
-            // 2. 토큰 유효성 검증
             if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
 
-                // 3. 토큰에서 사용자 정보 추출
+                // 1) JWT에서 이메일 추출
                 String email = jwtTokenProvider.getEmailFromToken(token);
                 String role = jwtTokenProvider.getRoleFromToken(token);
 
-                // 4. Spring Security 인증 객체 생성
+                // 2) 이메일로 userId 조회
+                Integer userId = userMapper.findIdByEmail(email); // ⭐ 반드시 필요
+
+                if (userId != null) {
+                    // 🔥 3) request attribute에 userId 저장
+                    request.setAttribute("userId", userId);
+                }
+
+                // 4) Spring Security 인증 객체 생성
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 email,
@@ -50,10 +58,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // 5. SecurityContext에 인증 정보 저장
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                log.debug("인증 성공: email={}, role={}", email, role);
+                log.debug("인증 성공: email={}, userId={}, role={}", email, userId, role);
             }
         } catch (Exception e) {
             log.error("JWT 인증 실패", e);
@@ -62,15 +69,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    /**
-     * Request Header에서 JWT 토큰 추출
-     * Authorization: Bearer {token}
-     */
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
 
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7); // "Bearer " 이후의 토큰만 추출
+            return bearerToken.substring(7);
         }
 
         return null;
