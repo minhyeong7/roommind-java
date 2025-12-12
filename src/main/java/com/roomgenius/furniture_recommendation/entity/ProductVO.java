@@ -22,6 +22,9 @@ public class ProductVO {
     private String createdDate;
     private String updatedDate;
 
+    private Double avgRating;
+    private Integer reviewCount;
+
     private String majorCategory;
     private String middleCategory;
 
