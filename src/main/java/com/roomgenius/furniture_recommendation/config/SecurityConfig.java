@@ -36,8 +36,8 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",               // 로컬 개발용
-                "http://13.209.6.113",                 // EC2에서 React 배포 HTTP
-                "https://13.209.6.113",                // HTTPS 적용 시
+                "http://13.209.66.16",                 // EC2에서 React 배포 HTTP
+                "https://13.209.66.16",                // HTTPS 적용 시
                 "https://roommind-react.onrender.com"  // 이전 Render용 (지금은 필요 없지만 남겨도 무방)
         ));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE","PATCH"));
