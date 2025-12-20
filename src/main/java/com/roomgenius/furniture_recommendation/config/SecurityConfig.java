@@ -38,7 +38,13 @@ public class SecurityConfig {
                 "http://localhost:3000",               // 로컬 개발용
                 "http://13.209.66.16",                 // EC2에서 React 배포 HTTP
                 "https://13.209.66.16",                // HTTPS 적용 시
-                "https://roommind-react.onrender.com"  // 이전 Render용 (지금은 필요 없지만 남겨도 무방)
+                //  지금 배포 주소 (필수)  --- 가비아 도메인
+                "https://www.roommind.shop",
+                "http://www.roommind.shop",
+
+                // (선택) www 없이도 접속 가능하면
+                "https://roommind.shop",
+                "http://roommind.shop"
         ));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE","PATCH"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
